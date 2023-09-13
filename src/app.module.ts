@@ -19,7 +19,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
       password: '123123',
       database: 'family_tree',
       synchronize: true,
-      logging: true,
+      logging: false,
       entities: [__dirname + '/../**/*.entity{.js, .ts}'],
       namingStrategy: new SnakeNamingStrategy(),
     }),

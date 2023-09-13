@@ -1,4 +1,4 @@
-import { OriginClan } from 'src/origin-clan/origin-clan.entity';
+import { OriginClan } from '../origin-clan/origin-clan.entity';
 import {
   Column,
   Entity,
