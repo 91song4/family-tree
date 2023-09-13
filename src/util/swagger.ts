@@ -10,5 +10,5 @@ export function setupSwagger(app: INestApplication) {
 
   const document = SwaggerModule.createDocument(app, config);
 
-  SwaggerModule.setup('쪾보', app, document);
+  SwaggerModule.setup('api', app, document);
 }

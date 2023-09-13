@@ -1,4 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { OriginClanRepository } from './origin-clan.repository';
 
 @Injectable()
-export class OriginClanService {}
+export class OriginClanService {
+  constructor(private readonly originClanRepository: OriginClanRepository) {}
+}

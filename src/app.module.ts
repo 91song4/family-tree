@@ -7,6 +7,7 @@ import { FamilyNameModule } from './family-name/family-name.module';
 import { OriginClanModule } from './origin-clan/origin-clan.module';
 import { FamilyMemberModule } from './family-member/family-member.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 @Module({
   imports: [
@@ -18,8 +19,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       password: '123123',
       database: 'family_tree',
       synchronize: true,
-      logging: false,
-      entities: [],
+      logging: true,
+      entities: [__dirname + '/../**/*.entity{.js, .ts}'],
+      namingStrategy: new SnakeNamingStrategy(),
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'src', 'public'),
