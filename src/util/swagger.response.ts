@@ -7,7 +7,7 @@ export type TSwaggerCustomResponse = {
 
 export const memberNotFound: TSwaggerCustomResponse = {
   status: 404,
-  description: '멤버아이디가 존재하지 않을 경우',
+  description: '아이디가 존재하지 않을 경우',
 };
 
 export const isNotNumber: TSwaggerCustomResponse = {

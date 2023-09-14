@@ -8,9 +8,17 @@ export class FamilyMemberRepository extends Repository<FamilyMember> {
     super(FamilyMember, dataSource.createEntityManager());
   }
 
-  async getFamilyTreeById(familyMemberId) {
+  async getFamilyTreeById(familyMemberId: number): Promise<FamilyMember[]> {
     const [result] = await this.query(`call GetFamilyTree(${familyMemberId});`);
 
     return result;
+  }
+
+  async getClanTreeById(clanId: number): Promise<FamilyMember[]> {
+    return await this.find({
+      where: {
+        originClanId: clanId,
+      },
+    });
   }
 }

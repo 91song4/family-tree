@@ -8,5 +8,5 @@ export class MemberParamsDTO {
    */
   @IsNumber()
   @Type(() => Number)
-  familyMemberId: number;
+  id: number;
 }

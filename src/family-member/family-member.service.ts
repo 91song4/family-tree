@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { FamilyMemberRepository } from './family-member.repository';
+import { FamilyMember } from './family-member.entity';
 
 @Injectable()
 export class FamilyMemberService {
@@ -7,7 +8,7 @@ export class FamilyMemberService {
     private readonly familyMemberRepository: FamilyMemberRepository,
   ) {}
 
-  async getFamilyTreeById(familyMemberId) {
+  async getFamilyTreeById(familyMemberId: number): Promise<FamilyMember[]> {
     const familyTree = await this.familyMemberRepository.getFamilyTreeById(
       familyMemberId,
     );
@@ -19,5 +20,9 @@ export class FamilyMemberService {
     }
 
     return familyTree;
+  }
+
+  async getClanTreeById(clanId: number): Promise<FamilyMember[]> {
+    return this.familyMemberRepository.getClanTreeById(clanId);
   }
 }

@@ -82,4 +82,7 @@ export class FamilyMember {
     name: 'origin_clan_id',
   })
   originClan: OriginClan;
+
+  @Column({ unsigned: true, name: 'origin_clan_id' })
+  originClanId: number;
 }
