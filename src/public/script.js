@@ -28,11 +28,28 @@ function createSelect(list, selectType = 'family-name-select') {
   });
 
   select.addEventListener('change', async (e) => {
-    const targetId = e.target.id;
+    const selectId = e.target.id;
 
-    if (targetId === 'family-name-select') {
+    // 다음 셀렉트 내용 초기화
+    let nextSelect = e.target.nextElementSibling;
+    while (nextSelect.tagName === 'SELECT') {
+      const option = document.createElement('option');
+      option.text = nextSelect.children[0].text;
+
+      nextSelect.innerHTML = '';
+      nextSelect.appendChild(option);
+
+      nextSelect = nextSelect.nextElementSibling;
+    }
+
+    // 예외 처리 - 내용 선택이 아닌 경우
+    if (e.target.selectedOptions[0].text.indexOf('-') !== -1) {
+      return;
+    }
+
+    if (selectId === 'family-name-select') {
       const { data } = await axios.get(
-        `http://localhost:3000/origin-clan/${e.target.selectedOptions[0].id}`,
+        `http://localhost:3000/origin-clan/${e.target.selectedOptions[0].id}/origin`,
       );
 
       const list = data.map((item) => {
@@ -41,7 +58,16 @@ function createSelect(list, selectType = 'family-name-select') {
 
       createSelect(list, 'origin-select');
     }
-    if (targetId === 'origin-select') {
+    if (selectId === 'origin-select') {
+      const { data } = await axios.get(
+        `http://localhost:3000/origin-clan/${e.target.selectedOptions[0].id}/clan`,
+      );
+
+      const list = data.map((item) => {
+        return { id: item.originClanId, text: item.originClanName };
+      });
+
+      createSelect(list, 'clan-select');
     }
     if (targetId === 'clan-select') {
     }
