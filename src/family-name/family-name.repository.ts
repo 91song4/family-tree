@@ -7,4 +7,8 @@ export class FamilyNameRepository extends Repository<FamilyName> {
   constructor(private readonly dataSource: DataSource) {
     super(FamilyName, dataSource.createEntityManager());
   }
+
+  async getAllFamilyNames(): Promise<FamilyName[]> {
+    return await this.find();
+  }
 }

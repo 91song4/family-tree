@@ -45,6 +45,9 @@ export class OriginClan {
   })
   familyName: FamilyName;
 
+  @Column({ unsigned: true, name: 'family_name_id' })
+  familyNameId: number;
+
   @OneToMany((type) => FamilyMember, (familyMember) => familyMember.originClan)
   familyMember: FamilyMember[];
 }

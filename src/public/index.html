@@ -1,1 +1,28 @@
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<link
+  href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+  rel="stylesheet"
+  id="bootstrap-css"
+/>
+<!------ Include the above in your HEAD tag ---------->
+
 <script src="./script.js"></script>
+<link href="./index.css" rel="stylesheet" />
+
+<!--
+We will create a family tree using just CSS(3)
+The markup will be simple nested lists
+-->
+<label for="lang" id="select-label">족보</label>
+<select id="family-name-select">
+  <option value="">--성씨--</option>
+</select>
+<select id="origin-select">
+  <option value="">--본관--</option>
+</select>
+<select id="clan-select">
+  <option value="">--파--</option>
+</select>
+
+<div class="tree" id="tree"></div>
