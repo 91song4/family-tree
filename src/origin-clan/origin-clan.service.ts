@@ -10,7 +10,7 @@ export class OriginClanService {
     return await this.originClanRepository.getOriginByFamilyName(familyNameId);
   }
 
-  async getClanByOriginId(originId: number): Promise<OriginClan[]> {
-    return this.originClanRepository.getClanByOriginId(originId);
+  async getClanByOriginId(familyNameId: number): Promise<OriginClan[]> {
+    return await this.originClanRepository.getClanByOriginId(familyNameId);
   }
 }

@@ -58,7 +58,7 @@ async function selectEventListener(e) {
   // 본관 셀렉트인 경우
   if (selectId === 'origin-select') {
     const { data } = await axios.get(
-      `http://localhost:3000/origin-clan/${e.target.selectedOptions[0].id}/clan`,
+      `http://localhost:3000/origin-clan/${e.target.previousElementSibling.selectedOptions[0].id}/clan`,
     );
 
     const list = data.map((item) => {
@@ -74,8 +74,70 @@ async function selectEventListener(e) {
       `http://localhost:3000/family-member/clan/${e.target.selectedOptions[0].id}`,
     );
 
-    return;
+    return createTree(data);
   }
+}
+
+/**
+ * 족보 구조 생성기
+ */
+function createTree(data) {
+  const tree = document.getElementById('tree');
+
+  // 족보 초기화
+  tree.innerHTML = '';
+
+  Object.keys(data).forEach((item, i) => {
+    // 루트노드 생성
+    if (i === 0) {
+      const ul = document.createElement('ul');
+
+      const li = createNode(data[item][0]);
+
+      ul.appendChild(li);
+
+      return tree.appendChild(ul);
+    }
+
+    data[item].forEach((item) => {
+      const li = createNode(item);
+
+      const parentNodeLI = document.getElementById(`li-${item.father}`);
+      const parentComment = parentNodeLI.childNodes[0];
+
+      // 리프노드일 경우
+      if (parentComment.textContent === 'Leaf') {
+        const ul = document.createElement('ul');
+
+        ul.appendChild(li);
+
+        parentComment.textContent = '';
+
+        parentNodeLI.appendChild(ul);
+      }
+      // 리프노드가 아닌 경우
+      else {
+        parentNodeLI.children[1].appendChild(li);
+      }
+    });
+  });
+}
+
+/**
+ * 족보 노드 생성
+ */
+function createNode(nodeData) {
+  const li = document.createElement('li');
+  const a = document.createElement('a');
+  const comment = document.createComment('Leaf');
+
+  li.id = `li-${nodeData.memberId}`;
+  a.text = nodeData.memberName;
+
+  li.appendChild(comment);
+  li.appendChild(a);
+
+  return li;
 }
 
 /**

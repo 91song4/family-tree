@@ -22,7 +22,19 @@ export class FamilyMemberService {
     return familyTree;
   }
 
-  async getClanTreeById(clanId: number): Promise<FamilyMember[]> {
-    return this.familyMemberRepository.getClanTreeById(clanId);
+  async getClanTreeById(clanId: number) {
+    const originMembers = await this.familyMemberRepository.getClanTreeById(
+      clanId,
+    );
+
+    const data = {};
+    originMembers.forEach((member) => {
+      if (data[member.clanNumber] === undefined) {
+        data[member.clanNumber] = [member];
+      } else {
+        data[member.clanNumber].push(member);
+      }
+    });
+    return data;
   }
 }

@@ -18,5 +18,5 @@ export class GetClanParamsDTO {
    */
   @IsNumber()
   @Type(() => Number)
-  originId: number;
+  familyNameId: number;
 }

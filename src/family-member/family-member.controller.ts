@@ -1,7 +1,10 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { FamilyMemberService } from './family-member.service';
 import { ApiTags } from '@nestjs/swagger';
-import { MemberParamsDTO } from './dto/member-params.dto';
+import {
+  GetOriginMembersParamsDTO,
+  MemberParamsDTO,
+} from './dto/member-params.dto';
 import { isNotNumber, memberNotFound } from 'src/util/swagger.response';
 import { SwaggerErrorStatus } from 'src/util/swagger.decorator';
 import { FamilyMember } from './family-member.entity';
@@ -27,9 +30,7 @@ export class FamilyMemberController {
    */
   @SwaggerErrorStatus([memberNotFound, isNotNumber])
   @Get('/clan/:id')
-  async getClanTreeById(
-    @Param() { id: clanId }: MemberParamsDTO,
-  ): Promise<FamilyMember[]> {
-    return this.familyMemberService.getClanTreeById(clanId);
+  async getClanTreeById(@Param() { id: clanId }: GetOriginMembersParamsDTO) {
+    return await this.familyMemberService.getClanTreeById(clanId);
   }
 }

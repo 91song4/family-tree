@@ -14,9 +14,9 @@ export class OriginClanRepository extends Repository<OriginClan> {
     });
   }
 
-  async getClanByOriginId(originId: number): Promise<OriginClan[]> {
+  async getClanByOriginId(familyNameId: number): Promise<OriginClan[]> {
     return await this.find({
-      where: { manageOriginClanId: originId },
+      where: { familyNameId },
     });
   }
 }

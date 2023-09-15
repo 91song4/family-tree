@@ -25,10 +25,10 @@ export class OriginClanController {
   /**
    * 같은 본관을 둔 파 리스트 가져오기
    */
-  @Get(':originId/clan')
+  @Get(':familyNameId/clan')
   async getClanByOriginId(
-    @Param() { originId }: GetClanParamsDTO,
+    @Param() { familyNameId }: GetClanParamsDTO,
   ): Promise<OriginClan[]> {
-    return this.originClanService.getClanByOriginId(originId);
+    return await this.originClanService.getClanByOriginId(familyNameId);
   }
 }
