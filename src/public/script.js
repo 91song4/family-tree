@@ -28,7 +28,9 @@ function createSelect(list, selectType = 'family-name-select') {
   });
 
   select.addEventListener('change', async (e) => {
-    if (e.target.id === 'family-name-select') {
+    const targetId = e.target.id;
+
+    if (targetId === 'family-name-select') {
       const { data } = await axios.get(
         `http://localhost:3000/origin-clan/${e.target.selectedOptions[0].id}`,
       );
@@ -39,9 +41,9 @@ function createSelect(list, selectType = 'family-name-select') {
 
       createSelect(list, 'origin-select');
     }
-    if (e.target === 'origin-select') {
+    if (targetId === 'origin-select') {
     }
-    if (e.target === 'clan-select') {
+    if (targetId === 'clan-select') {
     }
   });
 }

@@ -2,7 +2,10 @@ import { Controller, Get, Param } from '@nestjs/common';
 import { OriginClanService } from './origin-clan.service';
 import { ApiTags } from '@nestjs/swagger';
 import { OriginClan } from './origin-clan.entity';
-import { OriginClanParamsDTO } from './dto/origin-clan-params.dto';
+import {
+  GetClanParamsDTO,
+  GetOriginParamsDTO,
+} from './dto/origin-clan-params.dto';
 
 @ApiTags('origin-clan')
 @Controller('origin-clan')
@@ -12,10 +15,20 @@ export class OriginClanController {
   /**
    * 같은 성씨를 사용하는 본관 리스트 가져오기
    */
-  @Get(':familyNameId')
-  async getOriginClanByFamilyName(
-    @Param() { familyNameId }: OriginClanParamsDTO,
+  @Get(':familyNameId/origin')
+  async getOriginByFamilyName(
+    @Param() { familyNameId }: GetOriginParamsDTO,
   ): Promise<OriginClan[]> {
-    return await this.originClanService.getOriginClanByFamilyName(familyNameId);
+    return await this.originClanService.getOriginByFamilyName(familyNameId);
+  }
+
+  /**
+   * 같은 본관을 둔 파 리스트 가져오기
+   */
+  @Get(':originId/clan')
+  async getClanByOriginId(
+    @Param() { originId }: GetClanParamsDTO,
+  ): Promise<OriginClan[]> {
+    return this.originClanService.getClanByOriginId(originId);
   }
 }

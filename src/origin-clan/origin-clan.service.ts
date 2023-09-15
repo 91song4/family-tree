@@ -6,9 +6,11 @@ import { OriginClan } from './origin-clan.entity';
 export class OriginClanService {
   constructor(private readonly originClanRepository: OriginClanRepository) {}
 
-  async getOriginClanByFamilyName(familyNameId: number): Promise<OriginClan[]> {
-    return await this.originClanRepository.getOriginClanByFamilyName(
-      familyNameId,
-    );
+  async getOriginByFamilyName(familyNameId: number): Promise<OriginClan[]> {
+    return await this.originClanRepository.getOriginByFamilyName(familyNameId);
+  }
+
+  async getClanByOriginId(originId: number): Promise<OriginClan[]> {
+    return this.originClanRepository.getClanByOriginId(originId);
   }
 }
