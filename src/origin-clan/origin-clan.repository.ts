@@ -7,4 +7,10 @@ export class OriginClanRepository extends Repository<OriginClan> {
   constructor(private readonly dataSource: DataSource) {
     super(OriginClan, dataSource.createEntityManager());
   }
+
+  async getOriginClanByFamilyName(familyNameId: number): Promise<OriginClan[]> {
+    return await this.find({
+      where: { familyNameId, manageOriginClanId: 0 },
+    });
+  }
 }

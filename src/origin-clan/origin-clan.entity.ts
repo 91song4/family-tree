@@ -32,7 +32,7 @@ export class OriginClan {
     nullable: false,
     name: 'manage_origin_clan_id',
   })
-  readonly manageOriginClanId: string;
+  readonly manageOriginClanId: number;
 
   @ManyToOne((type) => FamilyName, (familyName) => familyName.originClan, {
     onDelete: 'CASCADE',
