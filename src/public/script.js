@@ -1,4 +1,3 @@
-const backURL = 'http://localhost:3000';
 document.addEventListener('DOMContentLoaded', async () => {
   const { data } = await axios.get(`${backURL}/family-name`);
 

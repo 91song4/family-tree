@@ -33,7 +33,7 @@ jobs:
           script: |
             cd family-tree
             git pull origin main
-            npm ci
+            npm i
             npm run build
             pm2 stop main
             pm2 start dist/main.js
