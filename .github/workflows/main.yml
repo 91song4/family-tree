@@ -32,7 +32,8 @@ jobs:
 
           script: |
             cd family-tree
-            mkdir testdir
             git pull origin main
             npm ci
-            npm run start
+            npm run build
+            pm2 stop main
+            pm2 start dist/main.js
