@@ -9,6 +9,11 @@ export class FamilyNameRepository extends Repository<FamilyName> {
   }
 
   async getAllFamilyNames(): Promise<FamilyName[]> {
-    return await this.find();
+    try {
+      return await this.find();
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
   }
 }

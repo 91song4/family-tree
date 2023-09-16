@@ -15,10 +15,15 @@ export class FamilyMemberRepository extends Repository<FamilyMember> {
   }
 
   async getClanTreeById(clanId: number): Promise<FamilyMember[]> {
-    return await this.find({
-      where: {
-        originClanId: clanId,
-      },
-    });
+    try {
+      return await this.find({
+        where: {
+          originClanId: clanId,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
   }
 }
