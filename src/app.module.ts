@@ -7,21 +7,14 @@ import { FamilyNameModule } from './family-name/family-name.module';
 import { OriginClanModule } from './origin-clan/origin-clan.module';
 import { FamilyMemberModule } from './family-member/family-member.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmConfigService } from './config/typeOrm.config.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: '127.0.0.1',
-      port: 3306,
-      username: 'root',
-      password: '123123',
-      database: 'family_tree',
-      synchronize: true,
-      logging: false,
-      entities: [__dirname + '/../**/*.entity{.js, .ts}'],
-      namingStrategy: new SnakeNamingStrategy(),
+    ConfigModule.forRoot({ isGlobal: true }),
+    TypeOrmModule.forRootAsync({
+      useClass: TypeOrmConfigService,
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'src', 'public'),
