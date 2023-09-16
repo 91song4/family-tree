@@ -1,5 +1,6 @@
+const backURL = 'http://localhost:3000';
 document.addEventListener('DOMContentLoaded', async () => {
-  const { data } = await axios.get('http://localhost:3000/family-name');
+  const { data } = await axios.get(`${backURL}/family-name`);
 
   const list = data.map((item) => {
     return {
@@ -45,7 +46,7 @@ async function selectEventListener(e) {
   // 성씨 셀렉트인 경우
   if (selectId === 'family-name-select') {
     const { data } = await axios.get(
-      `http://localhost:3000/origin-clan/${e.target.selectedOptions[0].id}/origin`,
+      `${backURL}/origin-clan/${e.target.selectedOptions[0].id}/origin`,
     );
 
     const list = data.map((item) => {
@@ -58,7 +59,7 @@ async function selectEventListener(e) {
   // 본관 셀렉트인 경우
   if (selectId === 'origin-select') {
     const { data } = await axios.get(
-      `http://localhost:3000/origin-clan/${e.target.previousElementSibling.selectedOptions[0].id}/clan`,
+      `${backURL}/origin-clan/${e.target.previousElementSibling.selectedOptions[0].id}/clan`,
     );
 
     const list = data.map((item) => {
@@ -71,7 +72,7 @@ async function selectEventListener(e) {
   // 파 셀렉트인 경우
   if (selectId === 'clan-select') {
     const { data } = await axios.get(
-      `http://localhost:3000/family-member/clan/${e.target.selectedOptions[0].id}`,
+      `${backURL}/family-member/clan/${e.target.selectedOptions[0].id}`,
     );
 
     return createTree(data);
